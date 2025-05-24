@@ -1,0 +1,7 @@
+<img 
+    cdkDrag
+    (mousedown)="onMouseDownCard($event)"
+    (mouseup)="onMouseUpCard($event)"
+    [src]="'./' + this.getCard() + '.png'" 
+    [alt]="this.getCard()"
+>

@@ -1,0 +1,9 @@
+img {
+    position: fixed;
+    width: 10%;
+    left: 1vw;
+    bottom: 1vw;
+    border-radius: 7%;
+    box-shadow: 1px 0px 3px black;
+    user-select: none;
+}
