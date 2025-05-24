@@ -20,7 +20,7 @@ export class AppComponent implements AfterViewInit {
     let i = 0;
     for (let j = 0; j < suits.length; j++) {
       for (let k = 0; k < ranks.length; k++) {
-        this.cardComponents.get(i)!.setCard(suits[j], ranks[k]);
+        this.cardComponents.get(i)!.setCard(suits[j], ranks[k], i + 1);
         i++;
       }
     }
@@ -29,25 +29,14 @@ export class AppComponent implements AfterViewInit {
   }
 
   shuffle(): void {
-    let rng = Math.floor(Math.random() * this.cardComponents.length - 1) + 0;
-    let shuffledCards: Map<string, null> = new Map();
-    let i = 0;
-    let temp: CardComponent;
+    for (let i = this.deck.length - 1; i < 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
 
-    while (i < this.deck.length) {
-      if (
-        this.cardComponents.get(i)!.getCard() in shuffledCards ||
-        this.cardComponents.get(rng)!.getCard() in shuffledCards
-      ) {
-        continue;
-      }
+      [this.deck[i], this.deck[j]] = [this.deck[j], this.deck[i]];
+    }
 
-      temp = this.cardComponents.get(i)!;
-      this.cardComponents.get(i)!.setCard(this.cardComponents.get(rng)!.getSuit(), this.cardComponents.get(rng)!.getRank());
-      this.cardComponents.get(rng)!.setCard(temp.getSuit(), temp.getRank());
-
-      rng = Math.floor(Math.random() * this.cardComponents.length - 1) + 0;
-      i++;
+    for (let i = 0; i < this.deck.length; i++) {
+      this.cardComponents.get(i)!.setCard(this.deck[i].suit, this.deck[i].rank, 0);
     }
   }
 }

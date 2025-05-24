@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CdkDrag } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -8,15 +8,20 @@ import { CdkDrag } from '@angular/cdk/drag-drop';
   styleUrl: './card.component.css'
 })
 export class CardComponent {
+  @ViewChild("card") card: ElementRef;
   private suit: string;
   private rank: number;
+  private order: number;
   private revealed: boolean = false;
   private tapped: boolean = false;
   private prevMousePos = { x: 0, y: 0 };
 
-  setCard(suit: string, rank: number): void {
+  setCard(suit: string, rank: number, order: number): void {
     this.suit = suit;
     this.rank = rank;
+    this.order = order;
+
+    this.card.nativeElement.style.zIndex = this.order;
   }
 
   getSuit(): string {
@@ -27,8 +32,12 @@ export class CardComponent {
     return this.rank;
   }
 
+  getOrder(): number {
+    return this.order;
+  }
+
   getCard(): string {
-    return this.revealed ? `${this.suit}${this.rank}` : `back`;
+    return this.revealed ? `${this.suit}${this.rank}` : "back";
   }
 
   onMouseDownCard(e: any): void {
