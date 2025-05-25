@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { CdkDrag } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -9,9 +9,9 @@ import { CdkDrag } from '@angular/cdk/drag-drop';
 })
 export class CardComponent {
   @ViewChild("card") card: ElementRef;
-  private suit: string;
-  private rank: number;
-  private order: number;
+  @Input() suit: string;
+  @Input() rank: number;
+  @Input() order: number;
   private revealed: boolean = false;
   private tapped: boolean = false;
   private prevMousePos = { x: 0, y: 0 };
