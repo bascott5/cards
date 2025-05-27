@@ -1,3 +1,8 @@
 @for (card of deck; track i; let i = $index) {
-  <app-card [suit]="card.suit" [rank]="card.rank" [order]="card.order"></app-card>
+  <app-card 
+    [suit]="card.suit" 
+    [rank]="card.rank" 
+    [order]="card.order"
+    (mousedown)="onMouseDownCard(i)"
+  ></app-card>
 }

@@ -20,8 +20,6 @@ export class CardComponent {
     this.suit = suit;
     this.rank = rank;
     this.order = order;
-
-    this.card.nativeElement.style.zIndex = this.order;
   }
 
   getSuit(): string {
