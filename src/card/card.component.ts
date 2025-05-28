@@ -62,5 +62,12 @@ export class CardComponent {
 
   toggleTapped(): void {
     this.tapped = !this.tapped;
+
+    if (this.tapped) {
+      this.card.nativeElement.style.rotate = "90deg";
+      return;
+    }
+
+    this.card.nativeElement.style.rotate = "0deg";
   }
 }

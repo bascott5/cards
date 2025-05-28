@@ -1,8 +1,10 @@
-<img 
-    cdkDrag
-    (mousedown)="onMouseDownCard($event)"
-    (mouseup)="onMouseUpCard($event)"
-    [src]="'./' + this.getCard() + '.png'" 
-    [alt]="this.getCard()"
-    [style.zIndex]="this.order"
->
+<div cdkDrag>
+    <img 
+        #card
+        (mousedown)="onMouseDownCard($event)"
+        (mouseup)="onMouseUpCard($event)"
+        [src]="'./' + this.getCard() + '.png'" 
+        [alt]="this.getCard()"
+        [style.zIndex]="this.order"
+    >
+</div>
