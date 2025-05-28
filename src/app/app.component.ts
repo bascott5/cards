@@ -22,7 +22,6 @@ export class AppComponent implements OnInit {
         this.deck[i] = {
           suit: suits[j],
           rank: ranks[k],
-          order: i + 1
         }
         i++;
       }
@@ -48,22 +47,24 @@ export class AppComponent implements OnInit {
   }
 
   onMouseDownCard(i: number): void {
-    if (this.deck.length !== 52) {
+    if (i === 51) {
       return;
     }
     
-    if (this.deck[i].order === 52) {
+    if (i === 50) {
+      [this.deck[50], this.deck[51]] = [this.deck[51], this.deck[50]];
       return;
     }
 
-    // TODO: Find a better way of bringing current card to the top while pushing all other cards down by one
-    const prevOrder = this.deck[i].order;
-    for (let j = 0; j < this.deck.length; j++) {
-      if (this.deck[j].order === 52) {
-        this.deck[j].order = prevOrder;
-      }
+    let temp: Map<number, Card> = new Map();
+    temp.set(51, this.deck[i]);
+    temp.set(i, this.deck[51]);
+    for (let j = i + 1; j < this.deck.length; j++) {
+      temp.set(j - 1, this.deck[j]);
     }
 
-    this.deck[i].order = 52;
+    for (let j = i; j < this.deck.length; j++) {
+      this.deck[j] = temp.get(j) as Card;
+    }
   }
 }
